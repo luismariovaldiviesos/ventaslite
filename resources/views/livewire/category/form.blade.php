@@ -12,7 +12,7 @@
 				</span>
 			</span>
 		</div>
-		<input type="text" wire:model.lazy="name" class="form-control" placeholder="ej: Cursos" maxlength="255">
+		<input type="text" wire:model.lazy="name" class="form-control" placeholder="ej: Zapatos" maxlength="255">
 	</div>
 	@error('name') <span class="text-danger er">{{ $message }}</span> @enderror
 </div>

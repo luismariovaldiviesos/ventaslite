@@ -6,7 +6,7 @@
 	<div class="form-group">
 		<label >Nombre</label>
 		<input type="text" wire:model.lazy="name"
-		class="form-control product-name" placeholder="ej: Curso Laravel" autofocus >
+		class="form-control product-name" placeholder="ej: taco bajo" autofocus >
 		@error('name') <span class="text-danger er">{{ $message}}</span>@enderror
 	</div>
 </div>

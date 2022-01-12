@@ -16,47 +16,51 @@ class DenominationSeeder extends Seeder
     {
         Denomination::create([
         	'type' => 'BILLETE',
-        	'value' => 1000
+        	'value' => 100.00
         ]);
          Denomination::create([
         	'type' => 'BILLETE',
-        	'value' => 500
+        	'value' => 50.00
         ]);
           Denomination::create([
         	'type' => 'BILLETE',
-        	'value' => 200
+        	'value' => 20.00
         ]);
            Denomination::create([
         	'type' => 'BILLETE',
-        	'value' => 100
+        	'value' => 10.00
         ]);
             Denomination::create([
         	'type' => 'BILLETE',
-        	'value' => 50
+        	'value' => 5.00
         ]);
              Denomination::create([
         	'type' => 'BILLETE',
-        	'value' => 20
+        	'value' => 1.00
+        ]);
+        Denomination::create([
+        	'type' => 'MONEDA',
+        	'value' => 1.00
         ]);
               Denomination::create([
         	'type' => 'MONEDA',
-        	'value' => 10
+        	'value' => 0.50
         ]);
               Denomination::create([
         	'type' => 'MONEDA',
-        	'value' => 5
+        	'value' => 0.25
         ]);
               Denomination::create([
         	'type' => 'MONEDA',
-        	'value' => 2
-        ]);
-              Denomination::create([
-        	'type' => 'MONEDA',
-        	'value' => 1
+        	'value' => 0.10
         ]);
               Denomination::create([
         	'type' => 'MONEDA',
         	'value' => 0.5
+        ]);
+              Denomination::create([
+        	'type' => 'MONEDA',
+        	'value' => 0.01
         ]);
               Denomination::create([
         	'type' => 'OTRO',

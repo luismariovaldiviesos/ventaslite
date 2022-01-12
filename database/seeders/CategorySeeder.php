@@ -15,8 +15,7 @@ class CategorySeeder extends Seeder
     public function run()
     {
         Category::create([
-        	'name' => 'CURSOS',
-        	'image' => 'https://dummyimage.com/200x150/5c5756/fff'
-        ]);       
+        	'name' => 'ZAPATOS'
+        ]);
     }
 }

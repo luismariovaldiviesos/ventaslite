@@ -15,14 +15,13 @@ class ProductSeeder extends Seeder
     public function run()
     {
         Product::create([
-        	'name' => 'LARAVEL Y LIVEWIRE',
-        	'cost' => 200,
-        	'price' => 350,
-        	'barcode' => '75010065987',
-        	'stock' => 1000,
+        	'name' => 'taco bajo mujer',
+        	'cost' => 40,
+        	'price' => 50,
+        	'barcode' => '1',
+        	'stock' => 25,
         	'alerts' => 10,
-        	'category_id' => 1,
-        	'image' => 'curso.png'
-        ]);        
+        	'category_id' => 1
+        ]);
     }
 }
