@@ -11,14 +11,14 @@ use Livewire\WithPagination;
 
 class CoinsController extends Component
 {
-   
+
 	use WithFileUploads;
 	use WithPagination;
 
-	public $type,$value, $search, $image, $selected_id, $pageTitle, $componentName;
+	public $type,$value, $search, $selected_id, $pageTitle, $componentName;
 	private $pagination = 5;
 
-	
+
 	public function mount()
 	{
 		$this->pageTitle = 'Listado';
@@ -47,14 +47,14 @@ class CoinsController extends Component
     }
 
 
-    
+
     public function Edit($id)
     {
     	$record = Denomination::find($id, ['id','type','value','image']);
     	$this->type = $record->type;
     	$this->value = $record->value;
     	$this->selected_id = $record->id;
-    	$this->image = null;
+
 
     	$this->emit('show-modal', 'show modal!');
     }
@@ -71,7 +71,7 @@ class CoinsController extends Component
     	$messages = [
     		'type.required' => 'El tipo es requerido',
     		'type.not_in' => 'Elige un valor para el tipo distinto a Elegir',
-    		'value.required' => 'El valor es requerido',  
+    		'value.required' => 'El valor es requerido',
     		'value.unique'  		 => 'Ya existe el valor'
     	];
 
@@ -82,14 +82,14 @@ class CoinsController extends Component
     		'value' => $this->value
     	]);
 
-    	
-    	if($this->image)
-    	{
-    		$customFileName = uniqid() . '_.' . $this->image->extension();
-    		$this->image->storeAs('public/denominations', $customFileName);
-    		$denomination->image = $customFileName;
-    		$denomination->save();
-    	}
+
+    	// if($this->image)
+    	// {
+    	// 	$customFileName = uniqid() . '_.' . $this->image->extension();
+    	// 	$this->image->storeAs('public/denominations', $customFileName);
+    	// 	$denomination->image = $customFileName;
+    	// 	$denomination->save();
+    	// }
 
     	$this->resetUI();
     	$this->emit('item-added','Denominación Registrada');
@@ -120,24 +120,24 @@ class CoinsController extends Component
     		'value' => $this->value
     	]);
 
-    	if($this->image)
-    	{
-    		$customFileName = uniqid() . '_.' . $this->image->extension();
-    		$this->image->storeAs('public/denominations', $customFileName);
-    		$imageName = $denomination->image;
+    	// if($this->image)
+    	// {
+    	// 	$customFileName = uniqid() . '_.' . $this->image->extension();
+    	// 	$this->image->storeAs('public/denominations', $customFileName);
+    	// 	$imageName = $denomination->image;
 
-    		$denomination->image = $customFileName;
-    		$denomination->save();
+    	// 	$denomination->image = $customFileName;
+    	// 	$denomination->save();
 
-    		if($imageName !=null)
-    		{
-    			if(file_exists('storage/denominations' . $imageName))
-    			{
-    				unlink('storage/denominations' . $imageName);
-    			}
-    		}
+    	// 	if($imageName !=null)
+    	// 	{
+    	// 		if(file_exists('storage/denominations' . $imageName))
+    	// 		{
+    	// 			unlink('storage/denominations' . $imageName);
+    	// 		}
+    	// 	}
 
-    	}
+    	// }
 
     	$this->resetUI();
     	$this->emit('item-updated', 'Denominación Actualizada');
@@ -147,11 +147,10 @@ class CoinsController extends Component
     }
 
 
-    public function resetUI() 
+    public function resetUI()
     {
     	$this->type ='';
     	$this->value ='';
-    	$this->image = null;
     	$this->search ='';
     	$this->selected_id =0;
     }
@@ -162,14 +161,14 @@ class CoinsController extends Component
 	];
 
     public function Destroy(Denomination $denomination)
-    {   	
-    	
-    	$imageName = $denomination->image; 
+    {
+
+    	//$imageName = $denomination->image;
     	$denomination->delete();
 
-    	if($imageName !=null) {
-    		unlink('storage/denominations/' . $imageName);
-    	}
+    	// if($imageName !=null) {
+    	// 	unlink('storage/denominations/' . $imageName);
+    	// }
 
     	$this->resetUI();
     	$this->emit('item-deleted', 'Denominación Eliminada');
