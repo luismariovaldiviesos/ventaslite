@@ -19,7 +19,7 @@ class ProductsController extends Scaner //Component
 	use CartTrait;
 
 
-	public $name,$barcode,$cost,$price,$stock,$alerts,$categoryid,$search,$image,$selected_id,$pageTitle,$componentName;
+	public $name,$barcode,$cost,$price,$stock,$alerts,$categoryid,$search,$selected_id,$pageTitle,$componentName;
 	private $pagination = 5;
 
 
@@ -41,7 +41,7 @@ class ProductsController extends Scaner //Component
 
 
 	public function render()
-	{    	
+	{
 		if(strlen($this->search) > 0)
 			$products = Product::join('categories as c','c.id','products.category_id')
 		->select('products.*','c.name as category')
@@ -52,7 +52,7 @@ class ProductsController extends Scaner //Component
 		->paginate($this->pagination);
 		else
 			$products = Product::join('categories as c','c.id','products.category_id')
-		->select('products.*','c.name as category')						
+		->select('products.*','c.name as category')
 		->orderBy('products.name', 'asc')
 		->paginate($this->pagination);
 
@@ -103,13 +103,20 @@ class ProductsController extends Scaner //Component
 			'category_id' => $this->categoryid
 		]);
 
-		if($this->image) 
-		{
-			$customFileName = uniqid() . '_.' . $this->image->extension();
-			$this->image->storeAs('public/products', $customFileName);
-			$product->image = $customFileName;
-			$product->save();
-		}
+		// if($this->image)
+		// {
+		// 	$customFileName = uniqid() . '_.' . $this->image->extension();
+		// 	$this->image->storeAs('public/products', $customFileName);
+        //     $imageTemp = $product->image;
+		// 	$product->image = $customFileName;
+		// 	$product->save();
+        //     if($imageTemp !=null)
+        //     {
+        //         if(file_exists('storage/products/' . $imageTemp)) {
+        //             unlink('storage/products/' . $imageTemp);
+        //         }
+        //     }
+		// }
 
 		$this->resetUI();
 		$this->emit('product-added', 'Producto Registrado');
@@ -128,7 +135,7 @@ class ProductsController extends Scaner //Component
 		$this->stock = $product->stock;
 		$this->alerts = $product->alerts;
 		$this->categoryid = $product->category_id;
-		$this->image = null;
+
 
 		$this->emit('modal-show','Show modal');
 	}
@@ -169,21 +176,21 @@ class ProductsController extends Scaner //Component
 			'category_id' => $this->categoryid
 		]);
 
-		if($this->image) 
-		{
-			$customFileName = uniqid() . '_.' . $this->image->extension();
-			$this->image->storeAs('public/products', $customFileName);
-			$imageTemp = $product->image; // imagen temporal
-			$product->image = $customFileName;
-			$product->save();
+		// if($this->image)
+		// {
+		// 	$customFileName = uniqid() . '_.' . $this->image->extension();
+		// 	$this->image->storeAs('public/products', $customFileName);
+		// 	$imageTemp = $product->image; // imagen temporal
+		// 	$product->image = $customFileName;
+		// 	$product->save();
 
-			if($imageTemp !=null) 
-			{
-				if(file_exists('storage/products/' . $imageTemp )) {
-					unlink('storage/products/' . $imageTemp);
-				}
-			}
-		}
+		// 	if($imageTemp !=null)
+		// 	{
+		// 		if(file_exists('storage/products/' . $imageTemp )) {
+		// 			unlink('storage/products/' . $imageTemp);
+		// 		}
+		// 	}
+		// }
 
 		$this->resetUI();
 		$this->emit('product-updated', 'Producto Actualizado');
@@ -203,13 +210,12 @@ class ProductsController extends Scaner //Component
 		$this->alerts ='';
 		$this->search ='';
 		$this->categoryid ='Elegir';
-		$this->image = null;
-		$this->selected_id = 0;
+	    $this->selected_id = 0;
 
 	}
 
 	protected $listeners =[
-		'deleteRow' => 'Destroy'		
+		'deleteRow' => 'Destroy'
 	];
 
 	public function ScanCode($code)
@@ -221,14 +227,14 @@ class ProductsController extends Scaner //Component
 
 	public function Destroy(Product $product)
 	{
-		$imageTemp = $product->image;
+		// $imageTemp = $product->image;
 		$product->delete();
 
-		if($imageTemp !=null) {
-			if(file_exists('storage/products/' . $imageTemp )) {
-				unlink('storage/products/' . $imageTemp);
-			}
-		}
+		// if($imageTemp !=null) {
+		// 	if(file_exists('storage/products/' . $imageTemp )) {
+		// 		unlink('storage/products/' . $imageTemp);
+		// 	}
+		// }
 
 		$this->resetUI();
 		$this->emit('product-deleted', 'Producto Eliminado');

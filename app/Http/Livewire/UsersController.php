@@ -15,7 +15,7 @@ class UsersController extends Component
     use WithPagination;
     use WithFileUploads;
 
-    public $name,$phone,$email,$status,$image,$password,$selected_id,$fileLoaded,$profile;
+    public $name,$phone,$email,$status,$password,$selected_id,$fileLoaded,$profile;
     public $pageTitle, $componentName, $search;
     private $pagination = 3;
 
@@ -33,7 +33,7 @@ class UsersController extends Component
 
 
     public function render()
-    {       
+    {
         if(strlen($this->search) > 0)
             $data = User::where('name', 'like', '%' . $this->search . '%')
         ->select('*')->orderBy('name','asc')->paginate($this->pagination);
@@ -55,7 +55,6 @@ class UsersController extends Component
     $this->email='';
     $this->password='';
     $this->phone='';
-    $this->image ='';
     $this->search ='';
     $this->status ='Elegir';
     $this->selected_id =0;
@@ -123,13 +122,13 @@ $user = User::create([
 
 $user->syncRoles($this->profile);
 
-if($this->image) 
-{
-    $customFileName = uniqid() . ' _.' . $this->image->extension();
-    $this->image->storeAs('public/users', $customFileName);
-    $user->image = $customFileName;
-    $user->save();
-}
+// if($this->image)
+// {
+//     $customFileName = uniqid() . ' _.' . $this->image->extension();
+//     $this->image->storeAs('public/users', $customFileName);
+//     $user->image = $customFileName;
+//     $user->save();
+// }
 
 $this->resetUI();
 $this->emit('user-added','Usuario Registrado');
@@ -141,7 +140,7 @@ public function Update()
 
     $rules =[
         'email' => "required|email|unique:users,email,{$this->selected_id}",
-        'name' => 'required|min:3',    
+        'name' => 'required|min:3',
         'status' => 'required|not_in:Elegir',
         'profile' => 'required|not_in:Elegir'
     ];
@@ -169,28 +168,28 @@ public function Update()
         'profile' => $this->profile,
         'password' => strlen($this->password) > 0 ? bcrypt($this->password) : $user->password
     ]);
-    
+
     $user->syncRoles($this->profile);
 
 
-    if($this->image) 
-    {
-        $customFileName = uniqid() . ' _.' . $this->image->extension();
-        $this->image->storeAs('public/users', $customFileName);
-        $imageTemp = $user->image;
+    // if($this->image)
+    // {
+    //     $customFileName = uniqid() . ' _.' . $this->image->extension();
+    //     $this->image->storeAs('public/users', $customFileName);
+    //     $imageTemp = $user->image;
 
-        $user->image = $customFileName;
-        $user->save();
+    //     $user->image = $customFileName;
+    //     $user->save();
 
-        if($imageTemp !=null) 
-        {
-            if(file_exists('storage/users/' . $imageTemp)) {
-                unlink('storage/users/' . $imageTemp);
-            }
-        }
+    //     if($imageTemp !=null)
+    //     {
+    //         if(file_exists('storage/users/' . $imageTemp)) {
+    //             unlink('storage/users/' . $imageTemp);
+    //         }
+    //     }
 
 
-    }
+    // }
 
     $this->resetUI();
     $this->emit('user-updated','Usuario Actualizado');

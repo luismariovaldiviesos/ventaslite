@@ -32,7 +32,7 @@
 								<th class="table-th text-white text-center">PRECIO</th>
 								<th class="table-th text-white text-center">STOCK</th>
 								<th class="table-th text-white text-center">INV.MIN</th>
-								<th class="table-th text-white text-center">IMAGEN</th>
+								{{-- <th class="table-th text-white text-center">IMAGEN</th> --}}
 								<th class="table-th text-white text-center">ACTIONS</th>
 							</tr>
 						</thead>
@@ -64,11 +64,11 @@
 									<h6 class="text-center">{{$product->alerts}}</h6>
 								</td>
 
-								<td class="text-center">
+								{{-- <td class="text-center">
 									<span>
 										<img src="{{ asset('storage/products/' . $product->imagen ) }}" alt="imagen de ejemplo" height="70" width="80" class="rounded">
 									</span>
-								</td>
+								</td> --}}
 
 								<td class="text-center">
 									@can('product_update')

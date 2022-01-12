@@ -1,11 +1,11 @@
 @include('common.modalHead')
 
 <div class="row">
-	
+
 <div class="col-sm-12 col-md-8">
 	<div class="form-group">
 		<label >Nombre</label>
-		<input type="text" wire:model.lazy="name" 
+		<input type="text" wire:model.lazy="name"
 		class="form-control product-name" placeholder="ej: Curso Laravel" autofocus >
 		@error('name') <span class="text-danger er">{{ $message}}</span>@enderror
 	</div>
@@ -14,9 +14,9 @@
 <div class="col-sm-12 col-md-4">
 	<div class="form-group">
 		<label >Código</label>
-		<input type="text" wire:model.lazy="barcode" 
+		<input type="text" wire:model.lazy="barcode"
 		class="form-control"
-		{{ $selected_id > 0 ? 'disabled' : '' }} 		
+		{{ $selected_id > 0 ? 'disabled' : '' }}
 		placeholder="ej: 025974" >
 		@error('barcode') <span class="text-danger er">{{ $message}}</span>@enderror
 	</div>
@@ -70,15 +70,15 @@
 
 
 
-<div class="col-sm-12 col-md-8">
+{{-- <div class="col-sm-12 col-md-8">
 <div class="form-group custom-file">
 	<input type="file" class="custom-file-input form-control" wire:model="image"
-	accept="image/x-png, image/gif, image/jpeg"  
+	accept="image/x-png, image/gif, image/jpeg"
 	 >
 	 <label class="custom-file-label">Imágen {{$image}}</label>
 	 @error('image') <span class="text-danger er">{{ $message}}</span>@enderror
 </div>
-</div>
+</div> --}}
 
 
 

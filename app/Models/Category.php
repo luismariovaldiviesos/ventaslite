@@ -9,7 +9,7 @@ class Category extends Model
 {
 	use HasFactory;
 
-	protected $fillable = ['name','image'];
+	protected $fillable = ['name'];
 
 	public function products()
 	{
@@ -17,28 +17,28 @@ class Category extends Model
 	}
 
 	//Accessor
-	public function getImagenAttribute()
-	{
-	
+	// public function getImagenAttribute()
+	// {
 
-		if($this->image != null)
-			return (file_exists('storage/categories/' . $this->image) ? $this->image : 'noimg.jpg');
-		else
-			return 'noimg.jpg';		
 
-		//método 2
-		/*
-		if($this->image == null)
-		{		
-			if(file_exists('storage/categories/' . $this->image))
-				return $this->image;
-			else
-				return 'noimg.jpg';
-		} else {
-			return 'noimg.jpg';
-		}
-		*/
-		
-	}
+	// 	if($this->image != null)
+	// 		return (file_exists('storage/categories/' . $this->image) ? $this->image : 'noimg.jpg');
+	// 	else
+	// 		return 'noimg.jpg';
+
+	// 	//método 2
+	// 	/*
+	// 	if($this->image == null)
+	// 	{
+	// 		if(file_exists('storage/categories/' . $this->image))
+	// 			return $this->image;
+	// 		else
+	// 			return 'noimg.jpg';
+	// 	} else {
+	// 		return 'noimg.jpg';
+	// 	}
+	// 	*/
+
+	// }
 
 }

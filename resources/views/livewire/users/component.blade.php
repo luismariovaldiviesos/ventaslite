@@ -25,15 +25,14 @@
                                 <th class="table-th text-white text-center">EMAIL</th>
                                 <th class="table-th text-white text-center">ESTATUS</th>
                                 <th class="table-th text-white text-center">PERFIL</th>
-                                <th class="table-th text-white text-center">IMÁGEN</th>
-                                <th class="table-th text-white text-center">ACTIONS</th>
+                                 <th class="table-th text-white text-center">ACTIONS</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($data as $r)
                             <tr>
                                 <td><h6>{{$r->name}}</h6></td>
-                                
+
                                 <td class="text-center"><h6>{{$r->phone}}</h6></td>
                                 <td class="text-center"><h6>{{$r->email}}</h6></td>
                                 <td class="text-center">
@@ -44,23 +43,23 @@
                                     <small><b>Roles:</b>{{implode(',',$r->getRoleNames()->toArray())}}</small>
                                 </td>
 
-                                <td class="text-center">
-                                 @if($r->image != null) 
-                                 <img class="card-img-top img-fluid"                                             
-                                 src="{{ asset('storage/users/'.$r->image) }}" 
-                                 > 
-                                 @endif                                  
-                             </td>
+                                {{-- <td class="text-center">
+                                 @if($r->image != null)
+                                 <img class="card-img-top img-fluid"
+                                 src="{{ asset('storage/users/'.$r->image) }}"
+                                 >
+                                 @endif
+                             </td> --}}
 
                              <td class="text-center">
-                                <a href="javascript:void(0)" 
+                                <a href="javascript:void(0)"
                                 wire:click="edit({{$r->id}})"
                                 class="btn btn-dark mtmobile" title="Edit">
                                 <i class="fas fa-edit"></i>
                             </a>
                             @if(Auth()->user()->id != $r->id)
-                            <a href="javascript:void(0)" 
-                            onclick="Confirm('{{$r->id}}')" 
+                            <a href="javascript:void(0)"
+                            onclick="Confirm('{{$r->id}}')"
                             class="btn btn-dark" title="Delete">
                             <i class="fas fa-trash"></i>
                         </a>
@@ -97,23 +96,23 @@
             $('#theModal').modal('hide')
             noty(Msg)
         })
-        window.livewire.on('user-deleted', Msg => {           
+        window.livewire.on('user-deleted', Msg => {
             noty(Msg)
         })
-        window.livewire.on('hide-modal', Msg => {           
+        window.livewire.on('hide-modal', Msg => {
             $('#theModal').modal('hide')
         })
-        window.livewire.on('show-modal', Msg => {           
+        window.livewire.on('show-modal', Msg => {
             $('#theModal').modal('show')
         })
-        window.livewire.on('user-withsales', Msg => {           
+        window.livewire.on('user-withsales', Msg => {
             noty(Msg)
         })
 
     });
 
     function Confirm(id)
-    {   
+    {
 
         swal({
             title: 'CONFIRMAR',

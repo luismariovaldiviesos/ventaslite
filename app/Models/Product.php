@@ -9,7 +9,7 @@ class Product extends Model
 {
 	use HasFactory;
 
-	protected $fillable = ['name','barcode','cost','price','stock','alerts','image','category_id'];
+	protected $fillable = ['name','barcode','cost','price','stock','alerts','category_id'];
 
 
 	public function category()
@@ -23,14 +23,16 @@ class Product extends Model
 	}
 
 
-	public function getImagenAttribute()
-	{	
-		if($this->image != null)
-			return (file_exists('storage/products/' . $this->image) ? $this->image : 'noimg.jpg');
-		else
-			return 'noimg.jpg';		
-		
-	}
+    // public function getImagenAttribute()
+    // {
+    //     if($this->image != null)
+    //     return (file_exists('storage/products/' . $this->image) ? $this->image : 'noimg.jpg');
+    //     else
+    //     return 'noimg.jpg';
+
+
+
+    // }
 
 	public function getPriceAttribute($value)
 	{
