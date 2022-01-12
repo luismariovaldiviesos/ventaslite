@@ -1,0 +1,2 @@
+se crea un nuevo protocolo (en windows), que al momento de hacer clic se conecta con protocolo
+y deberiam imprimir (protocolo como mail:to)
