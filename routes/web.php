@@ -47,6 +47,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::get('users', UsersController::class);
+    Route::get('clientes', UsersController::class);
     Route::get('cashout', CashoutController::class);
     Route::get('reports', ReportsController::class);
 
