@@ -5,6 +5,7 @@ use App\Http\Livewire\AsignarController;
 use App\Http\Livewire\CashoutController;
 use App\Http\Livewire\CategoriesController;
 use App\Http\Livewire\CoinsController;
+use App\Http\Livewire\CompanyController;
 use App\Http\Livewire\Component1;
 use App\Http\Livewire\DashController;
 use App\Http\Livewire\ImportController;
@@ -41,6 +42,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('roles', RolesController::class);
         Route::get('permisos', PermisosController::class);
         Route::get('asignar', AsignarController::class);
+        Route::get('company', CompanyController::class);
+
     });
 
     Route::get('users', UsersController::class);

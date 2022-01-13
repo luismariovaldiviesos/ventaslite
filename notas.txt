@@ -9,4 +9,4 @@ clientes
 facturas descuentos
 pagos
 gastos
-configuraciones (empresa, impuestos)
+configuraciones ( impuestos)
