@@ -4,6 +4,7 @@ use App\Http\Controllers\ExportController;
 use App\Http\Livewire\AsignarController;
 use App\Http\Livewire\CashoutController;
 use App\Http\Livewire\CategoriesController;
+use App\Http\Livewire\ClienteController;
 use App\Http\Livewire\CoinsController;
 use App\Http\Livewire\CompanyController;
 use App\Http\Livewire\Component1;
@@ -47,7 +48,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::get('users', UsersController::class);
-    Route::get('clientes', UsersController::class);
+    Route::get('clientes', ClienteController::class);
     Route::get('cashout', CashoutController::class);
     Route::get('reports', ReportsController::class);
 

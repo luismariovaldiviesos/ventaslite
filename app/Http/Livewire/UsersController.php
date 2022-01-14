@@ -63,25 +63,24 @@ class UsersController extends Component
 }
 
 
-public function edit(User $user)
-{
-    $this->selected_id = $user->id;
-    $this->name = $user->name;
-    $this->phone = $user->phone;
-    $this->profile = $this->profile;
-    $this->status = $user->status;
-    $this->email = $user->email;
-    $this->password ='';
+    public function edit(User $user)
+    {
+        $this->selected_id = $user->id;
+        $this->name = $user->name;
+        $this->phone = $user->phone;
+        $this->profile = $this->profile;
+        $this->status = $user->status;
+        $this->email = $user->email;
+        $this->password ='';
 
-    $this->emit('show-modal','open!');
+        $this->emit('show-modal','open!');
 
-}
+    }
 
 
 protected $listeners =[
     'deleteRow' => 'destroy',
     'resetUI' => 'resetUI'
-
 ];
 
 
@@ -135,8 +134,8 @@ $this->emit('user-added','Usuario Registrado');
 
 }
 
-public function Update()
-{
+    public function Update()
+    {
 
     $rules =[
         'email' => "required|email|unique:users,email,{$this->selected_id}",
@@ -194,22 +193,23 @@ public function Update()
     $this->resetUI();
     $this->emit('user-updated','Usuario Actualizado');
 
-}
-
-
-public function destroy(User $user)
-{
- if($user) {
-    $sales = Sale::where('user_id', $user->id)->count();
-    if($sales > 0)  {
-        $this->emit('user-withsales','No es posible eliminar el usuario porque tiene ventas registradas');
-    } else {
-        $user->delete();
-        $this->resetUI();
-        $this->emit('user-deleted','Usuario Eliminado');
     }
-}
-}
+
+
+    public function destroy(User $user)
+    {
+        if($user)
+         {
+            $sales = Sale::where('user_id', $user->id)->count();
+            if($sales > 0)  {
+                $this->emit('user-withsales','No es posible eliminar el usuario porque tiene ventas registradas');
+            } else {
+                $user->delete();
+                $this->resetUI();
+                $this->emit('user-deleted','Usuario Eliminado');
+            }
+        }
+    }
 
 
 
