@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Cliente;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use App\Models\Denomination;
 use App\Models\SaleDetail;
@@ -13,10 +14,12 @@ use App\Models\Sale;
 use DB;
 
 class PosController extends Component
-{	
+{
 	use CartTrait;
 
 	public $total,$itemsQuantity, $efectivo, $change;
+
+    public $searchCliente = '';
 
 
 	public function mount()
@@ -25,16 +28,26 @@ class PosController extends Component
 		$this->change =0;
 		$this->total  = Cart::getTotal();
 		$this->itemsQuantity = Cart::getTotalQuantity();
-		
-		
+
+
 	}
 
 	public function render()
-	{		
-		
+	{
+        $clientesResult = [];
+        if(strlen($this->searchCliente) > 0)
+        {
+            $clientesResult = Cliente::where('nombre','like','%'.$this->searchCliente.'%')
+                                        ->orWhere('ruc','like','%'.$this->searchCliente.'%')->get();
+            //dd($clientesResult);
+        }
+        else{
+            $this->searchCliente ="Consumidor Final";
+        }
 		return view('livewire.pos.component', [
 			'denominations' => Denomination::orderBy('value','desc')->get(),
-			'cart' => Cart::getContent()->sortBy('name')
+			'cart' => Cart::getContent()->sortBy('name'),
+            'clienteResult' => $clientesResult
 		])
 		->extends('layouts.theme.app')
 		->section('content');
@@ -66,8 +79,8 @@ class PosController extends Component
 
 	// incrementar cantidad item en carrito
 	public function increaseQty(Product $product, $cant = 1)
-	{		
-		$this->IncreaseQuantity($product, $cant);	
+	{
+		$this->IncreaseQuantity($product, $cant);
 	}
 
 	// actualizar cantidad item en carrito
@@ -76,13 +89,13 @@ class PosController extends Component
 		if($cant <=0)
 			$this->removeItem($product->id);
 		else
-			$this->UpdateQuantity($product, $cant);	
+			$this->UpdateQuantity($product, $cant);
 	}
 
 	// decrementar cantidad item en carrito
 	public function decreaseQty($productId)
 	{
-		$this->decreaseQuantity($productId);	
+		$this->decreaseQuantity($productId);
 	}
 
 	// vaciar carrito
@@ -94,7 +107,7 @@ class PosController extends Component
 
 	// guardar venta
 	public function saveSale()
-	{		
+	{
 		if($this->total <=0)
 		{
 			$this->emit('sale-error','AGEGA PRODUCTOS A LA VENTA');
@@ -123,7 +136,7 @@ class PosController extends Component
 				'user_id' => Auth()->user()->id
 			]);
 
-			if($sale) 
+			if($sale)
 			{
 				$items = Cart::getContent();
 				foreach ($items as  $item) {
@@ -144,7 +157,7 @@ class PosController extends Component
 
 
 			DB::commit();
-				
+
 			Cart::clear();
 			$this->efectivo =0;
 			$this->change =0;
@@ -152,10 +165,10 @@ class PosController extends Component
 			$this->itemsQuantity = Cart::getTotalQuantity();
 			$this->emit('sale-ok','Venta registrada con éxito');
 			$this->emit('print-ticket', $sale->id);
-			
 
 
-			
+
+
 		} catch (Exception $e) {
 			DB::rollback();
 			$this->emit('sale-error', $e->getMessage());
@@ -174,10 +187,16 @@ class PosController extends Component
 	public function printLast()
 	{
 		$lastSale = Sale::latest()->first();
-		
-		if($lastSale)		
+
+		if($lastSale)
 			$this->emit('print-last-id', $lastSale->id);
 	}
 
+    public function seleccionaCliente($id)
+    {
+        dd($id);
+    }
+
+    //https://www.youtube.com/watch?v=BGNLi9Cojbs
 }
 

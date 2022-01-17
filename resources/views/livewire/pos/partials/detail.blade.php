@@ -1,4 +1,36 @@
 <div class="connect-sorting">
+    <div class="connect-sorting-content">
+        <div class="card simple-title-task ui-sortable-handle">
+            <div class="card-body">
+                <h5 class="text-center text-muted">Datos Cliente</h5>
+                <div class="input-group mb-4">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text input-gp">
+                            <i class="fas fa-search"></i>
+                        </span>
+                    </div>
+                    <input type="text" wire:model.debounce.500ms="searchCliente" placeholder="Buscar" class="form-control"
+                    >
+                </div>
+                <div>
+                  <ul>
+                      @foreach ($clienteResult as $c )
+                      <li class="border-b border-gray-700">
+                        <a href="javascript:void(0)"
+                         wire:click='seleccionaCliente({{$c->id}})'
+                         class="block hover:bg-gray-700 px-3 py-3">{{$c['nombre']}}</a>
+                    </li>
+                      @endforeach
+
+
+                  </ul>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
 
 <div class="connect-sorting-content">
 	<div class="card simple-title-task ui-sortable-handle">
