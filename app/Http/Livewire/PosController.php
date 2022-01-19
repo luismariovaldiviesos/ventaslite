@@ -21,6 +21,8 @@ class PosController extends Component
 
     public $searchCliente = '';
 
+	public $cliente_id;
+
 
 	public function mount()
 	{
@@ -41,9 +43,9 @@ class PosController extends Component
                                         ->orWhere('ruc','like','%'.$this->searchCliente.'%')->get();
             //dd($clientesResult);
         }
-        else{
-            $this->searchCliente ="Consumidor Final";
-        }
+        // else{
+        //     $this->searchCliente ="Consumidor Final";
+        // }
 		return view('livewire.pos.component', [
 			'denominations' => Denomination::orderBy('value','desc')->get(),
 			'cart' => Cart::getContent()->sortBy('name'),
@@ -108,6 +110,7 @@ class PosController extends Component
 	// guardar venta
 	public function saveSale()
 	{
+		//dd($this->cliente_id);
 		if($this->total <=0)
 		{
 			$this->emit('sale-error','AGEGA PRODUCTOS A LA VENTA');
@@ -123,6 +126,13 @@ class PosController extends Component
 			$this->emit('sale-error','EL EFECTIVO DEBE SER MAYOR O IGUAL AL TOTAL');
 			return;
 		}
+        if($this->cliente_id == null){
+
+            $this->emit('sale-error','iNGRESA DATOS DEL CLIENTE');
+			return;
+
+
+        }
 
 		DB::beginTransaction();
 
@@ -133,7 +143,8 @@ class PosController extends Component
 				'items' => $this->itemsQuantity,
 				'cash' => $this->efectivo,
 				'change' => $this->change,
-				'user_id' => Auth()->user()->id
+				'user_id' => Auth()->user()->id,
+                'cliente_id' => $this->cliente_id
 			]);
 
 			if($sale)
@@ -165,6 +176,8 @@ class PosController extends Component
 			$this->itemsQuantity = Cart::getTotalQuantity();
 			$this->emit('sale-ok','Venta registrada con éxito');
 			$this->emit('print-ticket', $sale->id);
+            $this->searchCliente = "";
+            $this->cliente_id="";
 
 
 
@@ -192,9 +205,11 @@ class PosController extends Component
 			$this->emit('print-last-id', $lastSale->id);
 	}
 
-    public function seleccionaCliente($id)
+    public function seleccionaCliente(Cliente $cliente)
     {
-        dd($id);
+        $this->cliente_id = $cliente->id;
+		$this->searchCliente = $cliente->nombre;
+
     }
 
     //https://www.youtube.com/watch?v=BGNLi9Cojbs

@@ -15,6 +15,13 @@ class ClienteSeeder extends Seeder
     public function run()
     {
         Cliente::create([
+            'nombre' => 'Consumidor Final',
+            'ruc' => '0101010101001',
+            'telefono' => '09999999',
+            'direccion' => 'dato no disponible',
+            'email' => ''
+        ]);
+        Cliente::create([
             'nombre' => 'Pedro Guerra',
             'ruc' => '010104649843',
             'telefono' => '088888879',

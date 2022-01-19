@@ -2,7 +2,7 @@
     <div class="connect-sorting-content">
         <div class="card simple-title-task ui-sortable-handle">
             <div class="card-body">
-                <h5 class="text-center text-muted">Datos Cliente</h5>
+                <h5 class="text-center text-muted">Agrega cliente a la venta</h5>
                 <div class="input-group mb-4">
                     <div class="input-group-prepend">
                         <span class="input-group-text input-gp">
