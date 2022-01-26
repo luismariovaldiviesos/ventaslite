@@ -12,6 +12,8 @@ use App\Traits\CartTrait;
 use App\Models\Product;
 use App\Models\Sale;
 use DB;
+use DOMDocument;
+use Illuminate\Support\Facades\Storage;
 
 class PosController extends Component
 {
@@ -167,6 +169,8 @@ class PosController extends Component
 			}
 
 
+            $this->creaXML();
+
 			DB::commit();
 
 			Cart::clear();
@@ -213,5 +217,171 @@ class PosController extends Component
     }
 
     //https://www.youtube.com/watch?v=BGNLi9Cojbs
+
+
+    public function creaXML()
+    {
+
+        $xml = new DOMDocument('1.0','utf-8');
+        $xml->formatOutput = true;
+        $xml_fac = $xml->createElement('factura');
+        $cabecera = $xml->createAttribute('id');
+        $cabecera->value = 'comprobante';
+        $cabecerav = $xml->createAttribute('version');
+        $cabecerav->value ='1.00';
+
+        $xml_inf =$xml->createElement('infoTributaria');  //info
+        $xml_amb =$xml->createElement('ambiente','1'); // ambiente  1 pruebas
+        $xml_tip =$xml->createElement('tipoEmision','1'); //tipo
+        $xml_raz =$xml->createElement('razonSocial','Valdivieso Solano Luis Mario'); // razon social
+        $xml_nom =$xml->createElement('nombreComercial','Valdivieso Solano Luis Mario'); //nombre comercial
+        $xml_ruc =$xml->createElement('ruc','0104649843001');
+
+        $xml_cla =  $xml->createElement('claveAcceso','2110201101179214673900110020010000000011234567813');
+        $xml_doc =  $xml->createElement('codDoc','01'); // factura
+        $xml_est =  $xml->createElement('estab','001'); // estabecimeinto
+        $xml_emi =  $xml->createElement('ptoEmi','001'); // punto emision
+        $xml_sec =  $xml->createElement('secuencial','000000001'); // secuencia (9 digitos )
+        $xml_dir =  $xml->createElement('dirMatriz','Davila chica y manuel moreno'); // dir matriz
+
+
+        $xml_def = $xml->createElement('infoFactura');
+        $xml_fec = $xml->createElement('fechaEmision','21/10/2012'); // dia mes año
+        $xml_des = $xml->createElement('dirEstablecimiento','Davila chica y manuel moreno');
+        $xml_obl = $xml->createElement('obligadoContabilidad','SI');
+        $xml_ide = $xml->createElement('tipoIdentificacionComprador','04');  // 05 CEDULA 0ALGO RUC
+        $xml_rco = $xml->createElement('razonSocialComprador','razo social del comprador');
+        $xml_idc = $xml->createElement('identificacionComprador','1713328506001');
+        $xml_tsi = $xml->createElement('totalSinImpuestos','295000.00');
+        $xml_tds = $xml->createElement('totalDescuento','00.00');
+
+        $xml_ips = $xml->createElement('totalConImpuestos','00.00');
+        $xml_tim = $xml->createElement('totalImpuesto','00.00');
+        $xml_tco = $xml->createElement('codigo','2'); // codigo impuesto
+        $xml_cpr = $xml->createElement('codigoProcentaje','2');
+        $xml_bas = $xml->createElement('baseImponible','1.00');
+        $xml_val = $xml->createElement('valor','0');
+
+        $xml_pro = $xml->createElement('propina','0.00');
+        $xml_imt = $xml->createElement('importeTotal','1.00');
+        $xml_mon = $xml->createElement('moneda','DOLAR');
+
+        $xml_pgs = $xml->createElement('pagos');
+        $xml_pag = $xml->createElement('pago');
+        $xml_fpa = $xml->createElement('formaPago','01');   // formas pagos
+        $xml_tot = $xml->createElement('total','1.00');
+        $xml_pla = $xml->createElement('plazo','30');
+        $xml_uti = $xml->createElement('unidadTiempo','dias');
+
+        $xml_dts = $xml->createElement('detalles');
+        $xml_det = $xml->createElement('detalle');
+        $xml_cop = $xml->createElement('codigoPrincipal','cod008');
+        $xml_dcr = $xml->createElement('descripcion','formateos');
+        $xml_can = $xml->createElement('cantidad','1');
+        $xml_pru = $xml->createElement('precioUnitario','20');
+        $xml_dsc = $xml->createElement('descuento','0');
+        $xml_tsm = $xml->createElement('precioTotalSinImpuesto','20');
+
+        $xml_ips = $xml->createElement('impuestos');
+        $xml_ipt = $xml->createElement('impuesto');
+        $xml_cdg = $xml->createElement('codigo','2');
+        $xml_cpt = $xml->createElement('codigoPorcentaje','2');
+        $xml_trf = $xml->createElement('tarifa','0.00');
+        $xml_bsi = $xml->createElement('baseImponible','1.00');
+        $xml_vlr = $xml->createElement('valor','2');
+
+        $xml_ifa = $xml->createElement('infoAdicional');
+        $xml_cp1 = $xml->createElement('campoAdicional','tucorreo@mail.com');
+        $atributo = $xml->createAttribute('nombre');
+        $atributo->value='email';
+
+        //cerrar tags
+
+        $xml_inf->appendChild($xml_amb);
+        $xml_inf->appendChild($xml_tip);
+        $xml_inf->appendChild($xml_raz);
+        $xml_inf->appendChild($xml_nom);
+        $xml_inf->appendChild($xml_ruc);
+        $xml_inf->appendChild($xml_cla);
+        $xml_inf->appendChild($xml_doc);
+        $xml_inf->appendChild($xml_est);
+        $xml_inf->appendChild($xml_emi);
+        $xml_inf->appendChild($xml_sec);
+        $xml_inf->appendChild($xml_dir);
+
+        $xml_fac->appendChild($xml_inf);
+
+            $xml_def->appendChild($xml_fec);
+            $xml_def->appendChild($xml_des);
+            $xml_def->appendChild($xml_obl);
+            $xml_def->appendChild($xml_ide);
+            $xml_def->appendChild($xml_rco);
+            $xml_def->appendChild($xml_idc);
+            $xml_def->appendChild($xml_tsi);
+            $xml_def->appendChild($xml_tds);
+            $xml_def->appendChild($xml_imt);
+            $xml_def->appendChild($xml_tim);
+            $xml_def->appendChild($xml_tco);
+            $xml_def->appendChild($xml_cpr);
+            $xml_def->appendChild($xml_bas);
+            $xml_def->appendChild($xml_val);
+
+        $xml_fac->appendChild($xml_def);
+
+
+        $xml_def->appendChild($xml_pro);
+        $xml_def->appendChild($xml_imt);
+        $xml_def->appendChild($xml_mon);
+
+        $xml_def->appendChild($xml_pgs);
+        $xml_pgs->appendChild($xml_pag);
+        $xml_pag->appendChild($xml_tot);
+        $xml_pag->appendChild($xml_pla);
+        $xml_pag->appendChild($xml_uti);
+
+
+        $xml_fac->appendChild($xml_dts);
+        $xml_dts->appendChild($xml_det);
+        $xml_det->appendChild($xml_cop);
+        $xml_det->appendChild($xml_dcr);
+        $xml_det->appendChild($xml_can);
+        $xml_det->appendChild($xml_pru);
+        $xml_det->appendChild($xml_dsc);
+        $xml_det->appendChild($xml_tsm);
+        $xml_det->appendChild($xml_ips);
+        $xml_ips->appendChild($xml_ipt);
+        $xml_ipt->appendChild($xml_cdg);
+        $xml_ipt->appendChild($xml_cpt);
+        $xml_ipt->appendChild($xml_trf);
+        $xml_ipt->appendChild($xml_bsi);
+        $xml_ipt->appendChild($xml_vlr);
+
+        $xml_fac->appendChild($xml_ifa);
+        $xml_ifa->appendChild($xml_cp1);
+        $xml_cp1->appendChild($atributo);
+
+        $xml_fac->appendChild($cabecera);
+        $xml_fac->appendChild($cabecerav);
+        $xml->appendChild($xml_fac);
+      //Se eliminan espacios en blanco
+        $xml->preserveWhiteSpace = false;
+
+        //Se ingresa formato de salida
+        $xml->formatOutput = true;
+
+        //Se instancia el objeto
+        $xml_string =$xml->saveXML();
+
+
+        //nombre unico
+        $customFileName = uniqid() . ' _.' . 'xml';
+
+        //Y se guarda en el nombre del archivo 'achivo.xml', y el obejto nstanciado
+        Storage::disk('local')->put('archivo'.$customFileName,$xml_string);
+
+    }
+
+
+
 }
 
