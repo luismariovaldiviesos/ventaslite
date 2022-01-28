@@ -54,7 +54,7 @@ class CategoriesController extends Component
 
 	public function Edit($id)
 	{
-		$record = Category::find($id, ['id','name','image']);
+		$record = Category::find($id, ['id','name']);
 		$this->name = $record->name;
 		$this->selected_id = $record->id;
 

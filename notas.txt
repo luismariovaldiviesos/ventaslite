@@ -5,8 +5,7 @@ y deberiam imprimir (protocolo como mail:to)
 
 mudulos que faltan
 estadisticas
-clientes
-facturas descuentos
+facturas descuentos-buscar producnto por nombre, eliminar factura
 pagos
 gastos
 configuraciones ( impuestos)
