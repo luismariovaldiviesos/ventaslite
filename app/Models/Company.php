@@ -12,4 +12,13 @@ class Company extends Model
     protected $fillable = ['name','ruc','address','phone','mail'];
 
 
+
+    // una compania tiene una o varias cajas
+
+    public function cajas ()
+    {
+        return  $this->hasMany(Caja::class);
+    }
+
+
 }

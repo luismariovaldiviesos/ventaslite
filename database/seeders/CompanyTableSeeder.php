@@ -15,11 +15,12 @@ class CompanyTableSeeder extends Seeder
     public function run()
     {
         Company::create([
-            'name' => 'Ventas SOS',
+            'razonSocial' => 'Khipu Desarrollo de Software',
+            'nombreComercial' => 'Khipu Desarrollo de Software',
             'ruc' => '0104649843001',
-            'address' => 'davila chica',
+            'address' => 'Dávila Chica y MAnuel Moreno',
             'phone' => '0987308688',
-            'email'=> 'ventas@gmail.com'
+            'email'=> 'khipusistemas@gmail.com'
         ]);
     }
 }

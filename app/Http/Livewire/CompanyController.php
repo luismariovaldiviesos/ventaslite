@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Caja;
 use App\Models\Company;
 use Livewire\Component;
 
@@ -12,11 +13,11 @@ class CompanyController extends Component
     public  function  mount()
     {
         $empresa = Company::all();
+
         if ($empresa->count()> 0)
         {
-
            $this->selected_id = $empresa[0]->id;
-            $this->name = $empresa[0]->name;
+            $this->name = $empresa[0]->nombreComercial;
             $this->address = $empresa[0]->address;
             $this->phone = $empresa[0]->phone;
             $this->ruc = $empresa[0]->ruc;
@@ -27,6 +28,7 @@ class CompanyController extends Component
     }
     public function render()
     {
+
         return view('livewire.company.component')->extends('layouts.theme.app')
         ->section('content');;
     }

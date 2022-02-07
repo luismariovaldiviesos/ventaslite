@@ -235,25 +235,25 @@ class PosController extends Component
         $xml_tip =$xml->createElement('tipoEmision','1'); //tipo
         $xml_raz =$xml->createElement('razonSocial','Valdivieso Solano Luis Mario'); // razon social
         $xml_nom =$xml->createElement('nombreComercial','Valdivieso Solano Luis Mario'); //nombre comercial
-        $xml_ruc =$xml->createElement('ruc','0104649843001');
+        $xml_ruc =$xml->createElement('ruc','0104649843001'); // en tabla
 
-        $xml_cla =  $xml->createElement('claveAcceso','2110201101179214673900110020010000000011234567813');
-        $xml_doc =  $xml->createElement('codDoc','01'); // factura
-        $xml_est =  $xml->createElement('estab','001'); // estabecimeinto
-        $xml_emi =  $xml->createElement('ptoEmi','001'); // punto emision
-        $xml_sec =  $xml->createElement('secuencial','000000001'); // secuencia (9 digitos )
+        $xml_cla =  $xml->createElement('claveAcceso','2110201101179214673900110020010000000011234567813'); // se genera automaticamente mertodo
+        $xml_doc =  $xml->createElement('codDoc','01'); // factura se genera auntomaitico
+        $xml_est =  $xml->createElement('estab','001'); // estabecimeinto configurar   REVISAR
+        $xml_emi =  $xml->createElement('ptoEmi','001'); // punto emision  REVISAR
+        $xml_sec =  $xml->createElement('secuencial','000000001'); // secuencia (9 digitos ) REVISAR
         $xml_dir =  $xml->createElement('dirMatriz','Davila chica y manuel moreno'); // dir matriz
 
 
         $xml_def = $xml->createElement('infoFactura');
-        $xml_fec = $xml->createElement('fechaEmision','21/10/2012'); // dia mes año
-        $xml_des = $xml->createElement('dirEstablecimiento','Davila chica y manuel moreno');
-        $xml_obl = $xml->createElement('obligadoContabilidad','SI');
-        $xml_ide = $xml->createElement('tipoIdentificacionComprador','04');  // 05 CEDULA 0ALGO RUC
-        $xml_rco = $xml->createElement('razonSocialComprador','razo social del comprador');
-        $xml_idc = $xml->createElement('identificacionComprador','1713328506001');
-        $xml_tsi = $xml->createElement('totalSinImpuestos','295000.00');
-        $xml_tds = $xml->createElement('totalDescuento','00.00');
+        $xml_fec = $xml->createElement('fechaEmision','21/10/2012'); // FECHA VENTA
+        $xml_des = $xml->createElement('dirEstablecimiento','Davila chica y manuel moreno');  //
+        $xml_obl = $xml->createElement('obligadoContabilidad','SI'); //  INTERNO
+        $xml_ide = $xml->createElement('tipoIdentificacionComprador','04');  // 05 CEDULA 0ALGO RUC  REVISAR RUC COMPRADOR
+        $xml_rco = $xml->createElement('razonSocialComprador','razo social del comprador'); // NOMBRE CLIENTE
+        $xml_idc = $xml->createElement('identificacionComprador','1713328506001');  // RUC O CEDIULA CLIENTE
+        $xml_tsi = $xml->createElement('totalSinImpuestos','295000.00');   // VENTA
+        $xml_tds = $xml->createElement('totalDescuento','00.00'); // DESCUENTOS REVISAR
 
         $xml_ips = $xml->createElement('totalConImpuestos','00.00');
         $xml_tim = $xml->createElement('totalImpuesto','00.00');
@@ -264,23 +264,23 @@ class PosController extends Component
 
         $xml_pro = $xml->createElement('propina','0.00');
         $xml_imt = $xml->createElement('importeTotal','1.00');
-        $xml_mon = $xml->createElement('moneda','DOLAR');
+        $xml_mon = $xml->createElement('moneda','DOLAR'); // INTERNO
 
         $xml_pgs = $xml->createElement('pagos');
         $xml_pag = $xml->createElement('pago');
-        $xml_fpa = $xml->createElement('formaPago','01');   // formas pagos
+        $xml_fpa = $xml->createElement('formaPago','01');   // formas pagos  REVISAR
         $xml_tot = $xml->createElement('total','1.00');
         $xml_pla = $xml->createElement('plazo','30');
         $xml_uti = $xml->createElement('unidadTiempo','dias');
 
         $xml_dts = $xml->createElement('detalles');
         $xml_det = $xml->createElement('detalle');
-        $xml_cop = $xml->createElement('codigoPrincipal','cod008');
-        $xml_dcr = $xml->createElement('descripcion','formateos');
-        $xml_can = $xml->createElement('cantidad','1');
-        $xml_pru = $xml->createElement('precioUnitario','20');
-        $xml_dsc = $xml->createElement('descuento','0');
-        $xml_tsm = $xml->createElement('precioTotalSinImpuesto','20');
+        $xml_cop = $xml->createElement('codigoPrincipal','cod008');  // COD PRODUCTO
+        $xml_dcr = $xml->createElement('descripcion','formateos'); // DESC PRODUCTO
+        $xml_can = $xml->createElement('cantidad','1');   // CANTIDAD PRODUCTO
+        $xml_pru = $xml->createElement('precioUnitario','20'); // PRECIO UNITARIO
+        $xml_dsc = $xml->createElement('descuento','0'); // DESCUENTO
+        $xml_tsm = $xml->createElement('precioTotalSinImpuesto','20');  // TOTAL
 
         $xml_ips = $xml->createElement('impuestos');
         $xml_ipt = $xml->createElement('impuesto');
