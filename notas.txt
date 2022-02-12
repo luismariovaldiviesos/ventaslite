@@ -14,3 +14,16 @@ configuraciones ( impuestos)
 https://programmerclick.com/article/961146391/
 https://www.youtube.com/watch?v=R7lx8Y_lpIg
 
+
+
+firma electronica
+
+facturacionphp es el proyecto
+index  donde esta la parte grafica
+dentro de la carpeta controladores:
+    ctr_xml  -> crea el xml, importa el metodo digito_verificados.php
+    ctr_firmarxml -> firma los docuemntos y guarda en los repos
+        linea 24 a 27 guarda archivos
+        linea 37 es el comando para firmar con el jar de java que esta directo en el c
+    ctr_pdf crea el pdf crea el pdf de la factura
+    ctr_funciones
