@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 
 use App\Http\Livewire\Scaner;
 use App\Models\Category;
+use App\Models\Impuesto;
 use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -19,7 +20,7 @@ class ProductsController extends Scaner //Component
 	use CartTrait;
 
 
-	public $name,$barcode,$cost,$price,$stock,$alerts,$categoryid,$search,$selected_id,$pageTitle,$componentName;
+	public $name,$barcode,$cost,$price,$stock,$alerts,$categoryid,$impuesto_id, $search,$selected_id,$pageTitle,$componentName;
 	private $pagination = 5;
 
 
@@ -34,11 +35,8 @@ class ProductsController extends Scaner //Component
 		$this->pageTitle = 'Listado';
 		$this->componentName = 'Productos';
 		$this->categoryid = 'Elegir';
+        $this->impuesto_id = 'Elegir';
 	}
-
-
-
-
 
 	public function render()
 	{
@@ -61,7 +59,8 @@ class ProductsController extends Scaner //Component
 
 		return view('livewire.products.component', [
 			'data' => $products,
-			'categories' => Category::orderBy('name', 'asc')->get()
+			'categories' => Category::orderBy('name', 'asc')->get(),
+            'impuestos' => Impuesto::orderBy('id','asc')->get()
 		])
 		->extends('layouts.theme.app')
 		->section('content');
@@ -76,7 +75,8 @@ class ProductsController extends Scaner //Component
 			'price' => 'required',
 			'stock' => 'required',
 			'alerts' => 'required',
-			'categoryid' => 'required|not_in:Elegir'
+			'categoryid' => 'required|not_in:Elegir',
+            'impuesto_id' => 'required|not_in:Elegir'
 		];
 
 		$messages = [
@@ -88,6 +88,7 @@ class ProductsController extends Scaner //Component
 			'stock.required' => 'El stock es requerido',
 			'alerts.required' => 'Ingresa el valor mínimo en existencias',
 			'categoryid.not_in' => 'Elige un nombre de categoría diferente de Elegir',
+            'impuesto_id.not_in' => 'Elige un impuesto',
 		];
 
 		$this->validate($rules, $messages);
@@ -100,23 +101,10 @@ class ProductsController extends Scaner //Component
 			'barcode' => $this->barcode,
 			'stock' => $this->stock,
 			'alerts' => $this->alerts,
-			'category_id' => $this->categoryid
+			'category_id' => $this->categoryid,
+            'impuesto_id' => $this->impuesto_id
 		]);
 
-		// if($this->image)
-		// {
-		// 	$customFileName = uniqid() . '_.' . $this->image->extension();
-		// 	$this->image->storeAs('public/products', $customFileName);
-        //     $imageTemp = $product->image;
-		// 	$product->image = $customFileName;
-		// 	$product->save();
-        //     if($imageTemp !=null)
-        //     {
-        //         if(file_exists('storage/products/' . $imageTemp)) {
-        //             unlink('storage/products/' . $imageTemp);
-        //         }
-        //     }
-		// }
 
 		$this->resetUI();
 		$this->emit('product-added', 'Producto Registrado');
@@ -135,6 +123,7 @@ class ProductsController extends Scaner //Component
 		$this->stock = $product->stock;
 		$this->alerts = $product->alerts;
 		$this->categoryid = $product->category_id;
+        $this->impuesto_id = $product->impuesto_id;
 
 
 		$this->emit('modal-show','Show modal');
@@ -148,7 +137,8 @@ class ProductsController extends Scaner //Component
 			'price' => 'required',
 			'stock' => 'required',
 			'alerts' => 'required',
-			'categoryid' => 'required|not_in:Elegir'
+			'categoryid' => 'required|not_in:Elegir',
+            'impuesto_id' => 'required|not_in:Elegir'
 		];
 
 		$messages = [
@@ -160,6 +150,7 @@ class ProductsController extends Scaner //Component
 			'stock.required' => 'El stock es requerido',
 			'alerts.required' => 'Ingresa el valor mínimo en existencias',
 			'categoryid.not_in' => 'Elige un nombre de categoría diferente de Elegir',
+            'impuesto_id.not_in' => 'Elige un impuesto'
 		];
 
 		$this->validate($rules, $messages);
@@ -173,26 +164,11 @@ class ProductsController extends Scaner //Component
 			'barcode' => $this->barcode,
 			'stock' => $this->stock,
 			'alerts' => $this->alerts,
-			'category_id' => $this->categoryid
+			'category_id' => $this->categoryid,
+            'impuesto_id' => $this->impuesto_id
 		]);
 
-		// if($this->image)
-		// {
-		// 	$customFileName = uniqid() . '_.' . $this->image->extension();
-		// 	$this->image->storeAs('public/products', $customFileName);
-		// 	$imageTemp = $product->image; // imagen temporal
-		// 	$product->image = $customFileName;
-		// 	$product->save();
-
-		// 	if($imageTemp !=null)
-		// 	{
-		// 		if(file_exists('storage/products/' . $imageTemp )) {
-		// 			unlink('storage/products/' . $imageTemp);
-		// 		}
-		// 	}
-		// }
-
-		$this->resetUI();
+	    $this->resetUI();
 		$this->emit('product-updated', 'Producto Actualizado');
 
 
@@ -211,6 +187,7 @@ class ProductsController extends Scaner //Component
 		$this->search ='';
 		$this->categoryid ='Elegir';
 	    $this->selected_id = 0;
+        $this->impuesto_id = 0;
 
 	}
 

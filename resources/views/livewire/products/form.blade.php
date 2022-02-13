@@ -68,19 +68,18 @@
 </div>
 </div>
 
-
-
-{{-- <div class="col-sm-12 col-md-8">
-<div class="form-group custom-file">
-	<input type="file" class="custom-file-input form-control" wire:model="image"
-	accept="image/x-png, image/gif, image/jpeg"
-	 >
-	 <label class="custom-file-label">Imágen {{$image}}</label>
-	 @error('image') <span class="text-danger er">{{ $message}}</span>@enderror
-</div>
-</div> --}}
-
-
+<div class="col-sm-12 col-md-4">
+    <div class="form-group">
+        <label>Impuesto</label>
+        <select wire:model='impuesto_id' class="form-control">
+            <option value="Elegir" disabled>Elegir</option>
+            @foreach($impuestos as $impuesto)
+            <option value="{{$impuesto->id}}" >{{$impuesto->nombre}} {{$impuesto->porcentaje}}</option>
+            @endforeach
+        </select>
+        @error('impuesto_id') <span class="text-danger er">{{ $message}}</span>@enderror
+    </div>
+    </div>
 
 </div>
 

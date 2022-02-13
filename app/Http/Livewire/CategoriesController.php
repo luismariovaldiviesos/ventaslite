@@ -82,14 +82,6 @@ class CategoriesController extends Component
 		]);
 
 
-		// $customFileName;
-		// if($this->image)
-		// {
-		// 	$customFileName = uniqid() . '_.' . $this->image->extension();
-		// 	$this->image->storeAs('public/categories', $customFileName);
-		// 	$category->image = $customFileName;
-		// 	$category->save();
-		// }
 
 		$this->resetUI();
 		$this->emit('category-added','Categoría Registrada');
@@ -117,24 +109,7 @@ class CategoriesController extends Component
 			'name' => $this->name
 		]);
 
-		// if($this->image)
-		// {
-		// 	$customFileName = uniqid() . '_.' . $this->image->extension();
-		// 	$this->image->storeAs('public/categories', $customFileName);
-		// 	$imageName = $category->image;
 
-		// 	$category->image = $customFileName;
-		// 	$category->save();
-
-		// 	if($imageName !=null)
-		// 	{
-		// 		if(file_exists('storage/categories' . $imageName))
-		// 		{
-		// 			unlink('storage/categories' . $imageName);
-		// 		}
-		// 	}
-
-		// }
 
 		$this->resetUI();
 		$this->emit('category-updated', 'Categoría Actualizada');

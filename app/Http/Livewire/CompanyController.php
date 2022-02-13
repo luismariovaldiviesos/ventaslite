@@ -30,7 +30,7 @@ class CompanyController extends Component
     {
 
         return view('livewire.company.component')->extends('layouts.theme.app')
-        ->section('content');;
+        ->section('content');
     }
 
 

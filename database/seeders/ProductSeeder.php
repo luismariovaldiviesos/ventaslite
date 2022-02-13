@@ -21,7 +21,8 @@ class ProductSeeder extends Seeder
         	'barcode' => '1',
         	'stock' => 25,
         	'alerts' => 10,
-        	'category_id' => 1
+        	'category_id' => 1,
+            'impuesto_id' => 1
         ]);
     }
 }

@@ -23,8 +23,6 @@ class CreateProductsTable extends Migration
             $table->integer('alerts');
 
             $table->unsignedBigInteger('category_id');
-            //table->unsignedBigInteger('category_id');
-            //$table->bigInteger('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');
 
             $table->timestamps();
