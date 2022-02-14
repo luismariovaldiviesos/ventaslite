@@ -68,22 +68,4 @@
 </div>
 </div>
 
-<div class="col-sm-12 col-md-4">
-    <div class="form-group">
-        <label>Impuesto</label>
-        <select wire:model='impuesto_id' class="form-control">
-            <option value="Elegir" disabled>Elegir</option>
-            @foreach($impuestos as $impuesto)
-            <option value="{{$impuesto->id}}" >{{$impuesto->nombre}} {{$impuesto->porcentaje}}</option>
-            @endforeach
-        </select>
-        @error('impuesto_id') <span class="text-danger er">{{ $message}}</span>@enderror
-    </div>
-    </div>
-
-</div>
-
-
-
-
 @include('common.modalFooter')
