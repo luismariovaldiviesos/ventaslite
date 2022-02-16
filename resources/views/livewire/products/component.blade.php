@@ -66,7 +66,7 @@
 
 								<td class="text-center">
                                     @foreach ($product->impuestos as $imp )
-                                   <span><h6 class="text-center">{{$imp->nombre}}-{{$imp->porcentaje}}%</h6></span>
+                                   <span class="badge badge-success"><h6 class="text-center">{{$imp->nombre}}-{{$imp->porcentaje}}%</h6></span>
                                     @endforeach
 								</td>
 
