@@ -4,6 +4,10 @@
 
 
 	<div class="row layout-top-spacing">
+        <div class="col-sm-12 col-md-12">
+			<!-- DETALLES -->
+			@include('livewire.pos.partials.encabezado')
+		</div>
 
 		<div class="col-sm-12 col-md-8">
 			<!-- DETALLES -->
@@ -31,7 +35,7 @@
 <script src="{{ asset('js/keypress.js') }}"></script>
 <script src="{{ asset('js/onscan.js') }}"></script>
 <script>
-    
+
 try{
 
     onScan.attachTo(document, {

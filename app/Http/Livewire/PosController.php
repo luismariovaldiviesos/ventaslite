@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Cliente;
+use App\Models\Company;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use App\Models\Denomination;
 use App\Models\SaleDetail;
@@ -25,6 +26,9 @@ class PosController extends Component
 
 	public $cliente_id;
 
+    // datos empresa
+    public $name, $address, $phone, $ruc, $email, $selected_id, $razonSocial;
+
 
 	public function mount()
 	{
@@ -32,7 +36,14 @@ class PosController extends Component
 		$this->change =0;
 		$this->total  = Cart::getTotal();
 		$this->itemsQuantity = Cart::getTotalQuantity();
-
+        $empresa  =  Company::all();
+        $this->selected_id = $empresa[0]->id;
+        $this->razonSocial = $empresa[0]->razonSocial;
+        $this->name = $empresa[0]->nombreComercial;
+        $this->address = $empresa[0]->address;
+        $this->phone = $empresa[0]->phone;
+        $this->ruc = $empresa[0]->ruc;
+        $this->email = $empresa[0]->email;
 
 	}
 
@@ -45,9 +56,7 @@ class PosController extends Component
                                         ->orWhere('ruc','like','%'.$this->searchCliente.'%')->get();
             //dd($clientesResult);
         }
-        // else{
-        //     $this->searchCliente ="Consumidor Final";
-        // }
+
 		return view('livewire.pos.component', [
 			'denominations' => Denomination::orderBy('value','desc')->get(),
 			'cart' => Cart::getContent()->sortBy('name'),
