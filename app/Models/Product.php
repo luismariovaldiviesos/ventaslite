@@ -22,9 +22,10 @@ class Product extends Model
 		return $this->hasMany(SaleDetail::class);
 	}
 
-    public function impuestos ()
-    {
+   // un producto puede tener varios impuestos
+   public function impuestos(){
 
+        return $this->belongsToMany(Impuesto::class,'impuesto_producto');
     }
 
 

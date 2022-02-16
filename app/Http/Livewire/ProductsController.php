@@ -23,6 +23,10 @@ class ProductsController extends Scaner //Component
 	public $name,$barcode,$cost,$price,$stock,$alerts,$categoryid, $search,$selected_id,$pageTitle,$componentName;
 	private $pagination = 5;
 
+    public $selectedImpuestos =[];
+
+
+
 
 	public function paginationView()
 	{
@@ -49,10 +53,11 @@ class ProductsController extends Scaner //Component
 		->orderBy('products.name', 'asc')
 		->paginate($this->pagination);
 		else
-			$products = Product::join('categories as c','c.id','products.category_id')
+		 $products = Product::join('categories as c','c.id','products.category_id')
 		->select('products.*','c.name as category')
 		->orderBy('products.name', 'asc')
 		->paginate($this->pagination);
+
 
 
 
@@ -69,14 +74,15 @@ class ProductsController extends Scaner //Component
 
 	public function Store()
 	{
+        //dd($this->selectedImpuestos);
 		$rules  =[
 			'name' => 'required|unique:products|min:3',
 			'cost' => 'required',
 			'price' => 'required',
 			'stock' => 'required',
 			'alerts' => 'required',
-			'categoryid' => 'required|not_in:Elegir',
-            'impuesto_id' => 'required|not_in:Elegir'
+			'categoryid' => 'required|not_in:Elegir'
+
 		];
 
 		$messages = [
@@ -87,12 +93,10 @@ class ProductsController extends Scaner //Component
 			'price.required' => 'El precio es requerido',
 			'stock.required' => 'El stock es requerido',
 			'alerts.required' => 'Ingresa el valor mínimo en existencias',
-			'categoryid.not_in' => 'Elige un nombre de categoría diferente de Elegir',
-            'impuesto_id.not_in' => 'Elige un impuesto',
+			'categoryid.not_in' => 'Elige un nombre de categoría diferente de Elegir'
 		];
 
 		$this->validate($rules, $messages);
-
 
 		$product = Product::create([
 			'name' => $this->name,
@@ -103,8 +107,7 @@ class ProductsController extends Scaner //Component
 			'alerts' => $this->alerts,
 			'category_id' => $this->categoryid
 		]);
-
-
+        $product->impuestos()->sync($this->selectedImpuestos, true);
 		$this->resetUI();
 		$this->emit('product-added', 'Producto Registrado');
 
@@ -136,8 +139,7 @@ class ProductsController extends Scaner //Component
 			'price' => 'required',
 			'stock' => 'required',
 			'alerts' => 'required',
-			'categoryid' => 'required|not_in:Elegir',
-            'impuesto_id' => 'required|not_in:Elegir'
+			'categoryid' => 'required|not_in:Elegir'
 		];
 
 		$messages = [
@@ -148,8 +150,7 @@ class ProductsController extends Scaner //Component
 			'price.required' => 'El precio es requerido',
 			'stock.required' => 'El stock es requerido',
 			'alerts.required' => 'Ingresa el valor mínimo en existencias',
-			'categoryid.not_in' => 'Elige un nombre de categoría diferente de Elegir',
-            'impuesto_id.not_in' => 'Elige un impuesto'
+			'categoryid.not_in' => 'Elige un nombre de categoría diferente de Elegir'
 		];
 
 		$this->validate($rules, $messages);
@@ -165,7 +166,7 @@ class ProductsController extends Scaner //Component
 			'alerts' => $this->alerts,
 			'category_id' => $this->categoryid
 		]);
-
+        $product->impuestos()->sync($this->selectedImpuestos, true);
 	    $this->resetUI();
 		$this->emit('product-updated', 'Producto Actualizado');
 
@@ -185,6 +186,7 @@ class ProductsController extends Scaner //Component
 		$this->search ='';
 		$this->categoryid ='Elegir';
 	    $this->selected_id = 0;
+        $this->selectedImpuestos = [];
 
 
 	}
@@ -214,6 +216,29 @@ class ProductsController extends Scaner //Component
 		$this->resetUI();
 		$this->emit('product-deleted', 'Producto Eliminado');
 	}
+
+    public function syncImpuesto($state, $permisoName)
+{
+    dd($state,$permisoName);
+    // if($this->role !='Elegir')
+    // {
+    //     $roleName = Role::find($this->role);
+
+    //     if($state)
+    //     {
+    //         $roleName->givePermissionTo($permisoName);
+    //         $this->emit('permi',"Permiso asignado correctamente ");
+
+    //     } else {
+    //         $roleName->revokePermissionTo($permisoName);
+    //         $this->emit('permi',"Permiso eliminado correctamente ");
+    //     }
+
+    // } else {
+    //     $this->emit('permi',"Elige un role válido");
+    // }
+
+}
 
 
 }
