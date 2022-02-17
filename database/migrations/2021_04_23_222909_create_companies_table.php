@@ -18,9 +18,16 @@ class CreateCompaniesTable extends Migration
             $table->string('razonSocial',255);
             $table->string('nombreComercial',255)->nullable();
             $table->string('ruc',13)->unique();
-            $table->text('address',500)->nullable();
-            $table->string('phone',10)->nullable();
+            $table->string('estab'); //max 3
+            $table->string('ptoEmi');  // max 3
+            $table->string('dirMatriz',500);
+            $table->string('dirEstablecimiento',500);
+            $table->string('telefono',10)->nullable();
             $table->string('email')->nullable();
+            $table->integer('ambiente');  //1 0 2
+            $table->integer('tipoEmision'); // 1
+            $table->string('contribuyenteEspecial'); //5368
+            $table->string('obligadoContabilidad'); // si no
             $table->timestamps();
         });
     }

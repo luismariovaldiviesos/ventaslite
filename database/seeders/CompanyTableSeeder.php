@@ -18,9 +18,16 @@ class CompanyTableSeeder extends Seeder
             'razonSocial' => 'Khipu Desarrollo de Software',
             'nombreComercial' => 'Khipu Desarrollo de Software',
             'ruc' => '0104649843001',
-            'address' => 'Dávila Chica y MAnuel Moreno',
-            'phone' => '0987308688',
-            'email'=> 'khipusistemas@gmail.com'
+            'estab' => '001',
+            'ptoEmi' => '001',
+            'dirMatriz' => 'Dávila Chica y Manuel Moreno',
+            'dirEstablecimiento' => 'Dávila Chica y Manuel Moreno',
+            'telefono' => '0987308688',
+            'email'=> 'khipusistemas@gmail.com',
+            'ambiente' => '001',
+            'tipoEmision' => '001',
+            'contribuyenteEspecial' => 'revisar',
+            'obligadoContabilidad' => 'NO',
         ]);
     }
 }

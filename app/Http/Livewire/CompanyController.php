@@ -8,7 +8,8 @@ use Livewire\Component;
 
 class CompanyController extends Component
 {
-    public $name, $address, $phone, $ruc, $email, $selected_id;
+    public $razonSocial, $nombreComercial, $ruc,$estab,$ptoEmi,$dirMatriz,$dirEstablecimiento,
+         $telefono, $email, $ambiente,$tipoEmision,$contribuyenteEspecial,$obligadoContabilidad, $selected_id;
 
     public  function  mount()
     {
@@ -17,12 +18,19 @@ class CompanyController extends Component
         if ($empresa->count()> 0)
         {
            $this->selected_id = $empresa[0]->id;
-            $this->name = $empresa[0]->nombreComercial;
-            $this->address = $empresa[0]->address;
-            $this->phone = $empresa[0]->phone;
+            $this->razonSocial = $empresa[0]->razonSocial;
+            $this->nombreComercial = $empresa[0]->nombreComercial;
             $this->ruc = $empresa[0]->ruc;
+            $this->estab = $empresa[0]->estab;
+            $this->ptoEmi = $empresa[0]->ptoEmi;
+            $this->dirMatriz = $empresa[0]->dirMatriz;
+            $this->dirEstablecimiento = $empresa[0]->dirEstablecimiento;
+            $this->telefono = $empresa[0]->telefono;
             $this->email = $empresa[0]->email;
-
+            $this->ambiente = $empresa[0]->ambiente;
+            $this->tipoEmision = $empresa[0]->tipoEmision;
+            $this->contribuyenteEspecial = $empresa[0]->contribuyenteEspecial;
+            $this->obligadoContabilidad = $empresa[0]->obligadoContabilidad;
         }
 
     }

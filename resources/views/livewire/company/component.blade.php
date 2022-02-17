@@ -15,42 +15,98 @@
             <div class="widget-content">
 
                 <div class="row">
-                    <div class="col-sm-12 col-md-6">
+                    <div class="col-sm-12 col-md-3">
                         <div class="form-group">
-                            <label >Nombre</label>
-                            <input type="text" wire:model.lazy="name" class="form-control">
-                            @error('name') <span class="text-danger er">{{ $message }}</span> @enderror
+                            <label >Razón Social</label>
+                            <input type="text" wire:model.lazy="razonSocial" class="form-control">
+                            @error('razonSocial') <span class="text-danger er">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
-                    <div class="col-sm-12 col-md-6">
+                    <div class="col-sm-12 col-md-3">
                         <div class="form-group">
-                            <label >Dirección</label>
-                            <input type="text" wire:model.lazy="address" class="form-control">
-                            @error('address') <span class="text-danger er">{{ $message }}</span> @enderror
+                            <label >Nombre Comercial</label>
+                            <input type="text" wire:model.lazy="nombreComercial" class="form-control">
+                            @error('nombreComercial') <span class="text-danger er">{{ $message }}</span> @enderror
                         </div>
                     </div>
-
-                    <div class="col-sm-12 col-md-6">
-                        <div class="form-group">
-                            <label >Teléfono</label>
-                            <input type="text" wire:model.lazy="phone" class="form-control" maxlength="10">
-                            @error('phone') <span class="text-danger er">{{ $message }}</span> @enderror
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
+                    <div class="col-sm-12 col-md-2">
                         <div class="form-group">
                             <label >RUC</label>
                             <input type="text" wire:model.lazy="ruc" class="form-control" placeholder="ej:099999999" maxlength="10">
                             @error('ruc') <span class="text-danger er">{{ $message }}</span> @enderror
                         </div>
                     </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="form-group">
+                            <label >Establecimiento</label>
+                            <input type="text" wire:model.lazy="estab" class="form-control" placeholder="ej:099999999" maxlength="10">
+                            @error('estab') <span class="text-danger er">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="form-group">
+                            <label >Pto Emision</label>
+                            <input type="text" wire:model.lazy="ptoEmi" class="form-control" maxlength="10">
+                            @error('ptoEmi') <span class="text-danger er">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
 
-                    <div class="col-sm-12 col-md-6">
+                    <div class="col-sm-12 col-md-3">
+                        <div class="form-group">
+                            <label >Matriz</label>
+                            <input type="text" wire:model.lazy="dirMatriz" class="form-control">
+                            @error('dirMatriz') <span class="text-danger er">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                        <div class="form-group">
+                            <label >Sucursal</label>
+                            <input type="text" wire:model.lazy="dirEstablecimiento" class="form-control">
+                            @error('dirEstablecimiento') <span class="text-danger er">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="form-group">
+                            <label >Teléfono</label>
+                            <input type="text" wire:model.lazy="telefono" class="form-control" maxlength="10">
+                            @error('telefono') <span class="text-danger er">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
                         <div class="form-group">
                             <label >Email</label>
-                            <input type="text" wire:model.lazy="email" class="form-control" placeholder="ej:mails@mail.com" >
+                            <input type="text" wire:model.lazy="email" class="form-control" maxlength="10">
                             @error('email') <span class="text-danger er">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="form-group">
+                            <label >Ambiente</label>
+                            <input type="text" wire:model.lazy="ambiente" class="form-control" maxlength="10">
+                            @error('ambiente') <span class="text-danger er">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-2">
+                        <div class="form-group">
+                            <label >Emisión</label>
+                            <input type="text" wire:model.lazy="tipoEmision" class="form-control" maxlength="10">
+                            @error('tipoEmision') <span class="text-danger er">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="form-group">
+                            <label >Cont Espcial</label>
+                            <input type="text" wire:model.lazy="contribuyenteEspecial" class="form-control" maxlength="10">
+                            @error('contribuyenteEspecial') <span class="text-danger er">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="form-group">
+                            <label >Contabilidad</label>
+                            <input type="text" wire:model.lazy="obligadoContabilidad" class="form-control" maxlength="10">
+                            @error('obligadoContabilidad') <span class="text-danger er">{{ $message }}</span> @enderror
                         </div>
                     </div>
 

@@ -9,16 +9,27 @@ class Company extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','ruc','address','phone','mail'];
+    protected $fillable = ['razonSocial','nombreComercial','ruc','estab','ptoEmi','dirMatriz',
+
+        'dirEstablecimiento','telefono','email','ambiente','tipoEmision','contribuyenteEspecial','obligadoContabilidad'
+
+            ];
 
 
 
-    // una compania tiene una o varias cajas
 
-    public function cajas ()
-    {
-        return  $this->hasMany(Caja::class);
-    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
