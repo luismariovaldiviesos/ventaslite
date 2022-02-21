@@ -33,21 +33,21 @@
                     <div class="col-sm-12 col-md-2">
                         <div class="form-group">
                             <label >RUC</label>
-                            <input type="text" wire:model.lazy="ruc" class="form-control" placeholder="ej:099999999" maxlength="10">
+                            <input type="text" wire:model.lazy="ruc" class="form-control" placeholder="ej:0101049643001" maxlength="13">
                             @error('ruc') <span class="text-danger er">{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-2">
                         <div class="form-group">
                             <label >Establecimiento</label>
-                            <input type="text" wire:model.lazy="estab" class="form-control" placeholder="ej:099999999" maxlength="10">
+                            <input type="text" wire:model.lazy="estab" class="form-control" placeholder="ej:001" maxlength="3">
                             @error('estab') <span class="text-danger er">{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-2">
                         <div class="form-group">
                             <label >Pto Emision</label>
-                            <input type="text" wire:model.lazy="ptoEmi" class="form-control" maxlength="10">
+                            <input type="text" wire:model.lazy="ptoEmi" class="form-control" placeholder="ej:001" maxlength="3">
                             @error('ptoEmi') <span class="text-danger er">{{ $message }}</span> @enderror
                         </div>
                     </div>
@@ -76,14 +76,14 @@
                     <div class="col-sm-12 col-md-2">
                         <div class="form-group">
                             <label >Email</label>
-                            <input type="text" wire:model.lazy="email" class="form-control" maxlength="10">
+                            <input type="text" wire:model.lazy="email" class="form-control">
                             @error('email') <span class="text-danger er">{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-2">
                         <div class="form-group">
                             <label >Ambiente</label>
-                            <input type="text" wire:model.lazy="ambiente" class="form-control" maxlength="10">
+                            <input type="text" wire:model.lazy="ambiente" class="form-control" maxlength="1">
                             @error('ambiente') <span class="text-danger er">{{ $message }}</span> @enderror
                         </div>
                     </div>
@@ -91,21 +91,21 @@
                     <div class="col-sm-12 col-md-2">
                         <div class="form-group">
                             <label >Emisión</label>
-                            <input type="text" wire:model.lazy="tipoEmision" class="form-control" maxlength="10">
+                            <input type="text" wire:model.lazy="tipoEmision" class="form-control" maxlength="1">
                             @error('tipoEmision') <span class="text-danger er">{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-2">
                         <div class="form-group">
                             <label >Cont Espcial</label>
-                            <input type="text" wire:model.lazy="contribuyenteEspecial" class="form-control" maxlength="10">
+                            <input type="text" wire:model.lazy="contribuyenteEspecial" class="form-control">
                             @error('contribuyenteEspecial') <span class="text-danger er">{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-2">
                         <div class="form-group">
                             <label >Contabilidad</label>
-                            <input type="text" wire:model.lazy="obligadoContabilidad" class="form-control" maxlength="10">
+                            <input type="text" wire:model.lazy="obligadoContabilidad" class="form-control" maxlength="2">
                             @error('obligadoContabilidad') <span class="text-danger er">{{ $message }}</span> @enderror
                         </div>
                     </div>

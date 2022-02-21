@@ -47,21 +47,46 @@ class CompanyController extends Component
        // $this->selected_id = $this->id;
       //    dd($this->imagen);
         $rules = [
-            'name' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'ruc' => 'required',
-            'email' => "required|email|unique:companies,email,{$this->selected_id}"
+            'razonSocial' => 'required',
+            'nombreComercial' => 'required',
+            'ruc' => 'required|max:13',
+            'estab' => 'required|max:3',
+            'ptoEmi' => 'required|max:3',
+            'dirMatriz' => 'required',
+            'dirEstablecimiento' => 'required',
+            'telefono' => 'required',
+            'email' => "required|email|unique:companies,email,{$this->selected_id}",
+            'ambiente' => 'required|max:1',
+            'tipoEmision' => 'required|max:1',
+            'contribuyenteEspecial' => 'required|max:13',
+            'obligadoContabilidad' => 'required|max:2'
 
         ];
 
         $messages =[
-            'name.required' => 'Ingresa el nombre',
-            'address.required' => 'Ingresa una direccion ',
-            'phone.required' => 'Ingresa un telefono ',
-            'ruc.required' => 'Ingresa un ruc ',
-            'email.required' => 'Ingresa el correo ',
-            'email.email' => 'Ingresa un correo válido',
+            'razonSocial.required' => 'Ingrese la razón social de la empresa',
+            'nombreComercial.required' => 'Ingrese el nombre comercial de la empresa',
+            'estab.required' => 'Ingrese el código del establecimiento',
+            'estab.max' => 'Código del establecimiento debe ser máximo 3  caracteres',
+            'ruc.required' => 'Ingrese un ruc ',
+            'ruc.max' => 'Ruc debe tener máximo 13 caracteres ',
+            'ptoEmi.required' => 'Ingrese un punto de emisión ',
+            'ptoEmi.max' => 'Punto emision  debe tener máximo 3 caracteres ',
+            'dirMatriz.required' => 'Ingrese la direccion matriz',
+            'dirEstablecimiento.required' => 'Ingrese la direccion de establecimiento',
+            'telefono.required' => 'Ingrese el teléfono del establecimiento',
+            'email.required' => 'Ingrese el correo ',
+            'email.email' => 'Ingrese un correo válido',
+            'ambiente.required' => 'Ingrese  el ambiente del sistema',
+            'ambiente.max' => 'El ambiente debe ser de un solo caracter',
+            'tipoEmision.required' => 'Ingrese  el tipo de emision',
+            'tipoEmision.max' => 'El tipo de emisión debe ser de un solo caracter',
+            'contribuyenteEspecial.required' => 'Ingrese si es contribuyente especial',
+            'contribuyenteEspecial.max' => 'El codigo contribuyente especial debe tener máximo 13 caracteres',
+            'obligadoContabilidad.required' => 'Campo requerido',
+            'obligadoContabilidad.max' => 'El campo debe tener máximo 2 caracteres',
+
+
         ];
 
         $this->validate($rules, $messages);
@@ -70,13 +95,20 @@ class CompanyController extends Component
        $empresa = Company::find($this->selected_id);
        //dd($clinica);
         $empresa->update([
-            'name' => $this->name,
-            'address' => $this->address,
-            'phone' => $this->phone,
+            'razonSocial' => $this->razonSocial,
+            'nombreComercial' => $this->nombreComercial,
             'ruc' => $this->ruc,
-            'email' => $this->email
+            'estab' => $this->estab,
+            'ptoEmi' => $this->ptoEmi,
+            'dirMatriz' => $this->dirMatriz,
+            'dirEstablecimiento' => $this->dirEstablecimiento,
+            'telefono' => $this->telefono,
+            'email' => $this->email,
+            'ambiente' => $this->ambiente,
+            'tipoEmision' => $this->tipoEmision,
+            'contribuyenteEspecial' => $this->contribuyenteEspecial,
+            'obligadoContabilidad' => $this->obligadoContabilidad
         ]);
-
          $this->emit('empresa-added','Datos de Empresa guardado correctamente');
 
     }
