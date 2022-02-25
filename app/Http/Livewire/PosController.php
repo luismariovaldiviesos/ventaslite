@@ -27,7 +27,7 @@ class PosController extends Component
 	public $cliente_id;
 
     // datos empresa
-    public $name, $address, $phone, $ruc, $email, $selected_id, $razonSocial;
+    public $name, $address, $phone, $ruc, $email, $selected_id, $razonSocial, $ambiente, $tipoEmision, $nombreComercial;
 
 
 	public function mount()
@@ -44,6 +44,9 @@ class PosController extends Component
         $this->phone = $empresa[0]->phone;
         $this->ruc = $empresa[0]->ruc;
         $this->email = $empresa[0]->email;
+        $this->ambiente = $empresa[0]->ambiente;
+        $this->tipoEmision = $empresa[0]->tipoEmision;
+        $this->nombreComercial = $empresa[0]->nombreComercial;
 
 	}
 
@@ -121,7 +124,8 @@ class PosController extends Component
 	// guardar venta
 	public function saveSale()
 	{
-		//dd($this->cliente_id);
+        // sacar secuencial
+		dd($this->sacaDatos());
 		if($this->total <=0)
 		{
 			$this->emit('sale-error','AGEGA PRODUCTOS A LA VENTA');
@@ -201,6 +205,12 @@ class PosController extends Component
 		}
 
 	}
+
+
+    public function sacaDatos()
+    {
+        dd($this->ambiente, $this->tipoEmision, $this->razonSocial,$this->nombreComercial);
+    }
 
 
 	public function printTicket($ventaId)
